@@ -82,7 +82,7 @@ cp lesson02-HW-\{Your-Name\}-v1.ipynb lesson02-HW-Chuangxinyuan.ipynb
 
 ```bash
 git add lesson02-HW-Chuangxinyuan.ipynb
-git commit -s
+git commit -m "你的commit信息"
 ```
 
 在提交的commit信息中填写你的基本信息，如下图所示：
