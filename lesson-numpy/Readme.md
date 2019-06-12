@@ -1,8 +1,8 @@
-# Game_of_Life_Q.ipynb is homework template
+# Game_of_Life_Q.ipynb 是作业模版
 
-# Copy your own notebook like:
+# 复制自己的作业：
 
-Game_of_Life-HW-LiFang.ipynb
+Game_of_Life-HW-YourName.ipynb
 
-# Answer will reviewed on class, so you have 1 day to try to solve it.
+# 答案会在课上（06.15）讨论，所以，有两天时间完成
 
