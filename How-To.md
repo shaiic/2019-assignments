@@ -88,6 +88,10 @@ git commit -m "你的commit信息"
 
 lesson-02/.DS_Store
 
+注意不要修改模版文件，这个文件应该是只读的。
+
+lesson-02/lesson02-HW-{Your-Name}-v1.ipynb
+
 在提交的commit信息中填写你的基本信息，如下图所示：
 
 ![6](images/6.png)
