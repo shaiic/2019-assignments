@@ -82,8 +82,15 @@ cp lesson02-HW-\{Your-Name\}-v1.ipynb lesson02-HW-Chuangxinyuan.ipynb
 
 ```bash
 git add lesson02-HW-Chuangxinyuan.ipynb
-git commit -s
+git commit -m "你的commit信息"
 ```
+注意删除不必要的文件，以免扩算, 例如不要commit这种文件：
+
+lesson-02/.DS_Store
+
+注意不要修改模版文件，这个文件应该是只读的。
+
+lesson-02/lesson02-HW-{Your-Name}-v1.ipynb
 
 在提交的commit信息中填写你的基本信息，如下图所示：
 
