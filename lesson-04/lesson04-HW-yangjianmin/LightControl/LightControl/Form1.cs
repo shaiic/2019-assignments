@@ -191,6 +191,7 @@ namespace LightControl
                 recognizer.Recognized += Recognizer_Recognized;
                 Log("-----------------------");
                 await recognizer.StartContinuousRecognitionAsync().ConfigureAwait(true);
+                Log("#######################");
             }
             catch (Exception ex)
             {
