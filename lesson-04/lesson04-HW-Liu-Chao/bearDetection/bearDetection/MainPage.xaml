@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="bearDetection.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:bearDetection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+
+    <Grid>
+        <TextBox x:Name="bdUri" HorizontalAlignment="Left" Margin="97,46,0,0" Text="" VerticalAlignment="Top" Height="34" Width="677"/>
+        <Button x:Name="bdRecognize" Content="识别" HorizontalAlignment="Left" Margin="802,46,0,0" VerticalAlignment="Top" Click="BdRecognize_Click" Height="34" Width="94" RenderTransformOrigin="0.473,0.274"/>
+        <TextBlock x:Name="bdResult" HorizontalAlignment="Left" Margin="849,421,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="462" Height="500"/>
+        <Canvas x:Name="bdCanvas" HorizontalAlignment="Left" Height="580" Margin="97,107,0,0" VerticalAlignment="Top" Width="799"/>
+
+    </Grid>
+</Page>

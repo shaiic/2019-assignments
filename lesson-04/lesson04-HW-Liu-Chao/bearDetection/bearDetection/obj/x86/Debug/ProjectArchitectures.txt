@@ -1,0 +1,1 @@
+C:\working\bearDetection\bearDetection\bearDetection.csproj;x86
