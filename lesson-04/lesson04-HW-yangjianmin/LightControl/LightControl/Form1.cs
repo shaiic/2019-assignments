@@ -52,7 +52,10 @@ namespace LightControl
                     Bedlightbox.LoadAsync(pic);
                     Tablelightbox.LoadAsync(pic);
                 }
-
+                else if (lightMap.place == Place.Livingroom && lightMap.light == Light.All)
+                {
+                    Toplightbox.LoadAsync(pic);
+                }
                 else if (lightMap.light == Light.Top)
                 {
                     Toplightbox.LoadAsync(pic);
@@ -93,6 +96,12 @@ namespace LightControl
         }
 
         // 设置服务信息
+        //宋老师的
+        //const string speechKey = "ae9be3ac79434d5e828ea0b443400170";
+        //const string speechRegion = "westus";
+        //const string luisEndpoint = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/99ba0b18-fdb9-4773-a908-9c1811037694?verbose=true&timezoneOffset=-360&subscription-key=171ecbac277142d7bd1ba1dc316eb976&q=";
+
+        //我的
         const string speechKey = "5872e34bcb2f4af9ab970f61b5959320";
         const string speechRegion = "westus";
         const string luisEndpoint = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/6021af12-0bd9-4fba-a088-77730ccf99bf?verbose=true&timezoneOffset=-360&subscription-key=5872e34bcb2f4af9ab970f61b5959320&q=";
@@ -134,14 +143,21 @@ namespace LightControl
             // 按照意图控制灯
             if (!string.IsNullOrEmpty(intent))
             {
-                LightMap lightMap = ParseJsonLights(json);
+                List<LightMap> lightMapList = ParseJsonLights(json);
                 if (intent.Equals("TurnOn", StringComparison.OrdinalIgnoreCase))
                 {
-                    TurnOn(lightMap);
+                    lightMapList.ForEach(lightMap =>
+                    {
+                        TurnOn(lightMap);
+                    });
+                    
                 }
                 else if (intent.Equals("TurnOff", StringComparison.OrdinalIgnoreCase))
                 {
-                    TurnOff(lightMap);
+                    lightMapList.ForEach(lightMap =>
+                    {
+                        TurnOff(lightMap);
+                    });
                 }
             }
         }
@@ -177,6 +193,7 @@ namespace LightControl
         {
             try
             {
+                Log("Initialize() start-----------------------");
                 var speechConfig = SpeechConfig.FromSubscription(speechKey, speechRegion);
                 speechConfig.SpeechRecognitionLanguage = "zh-CN";
 
@@ -189,9 +206,9 @@ namespace LightControl
                 recognizer.Recognizing += Recognizer_Recognizing;
                 // 收到最终结果
                 recognizer.Recognized += Recognizer_Recognized;
-                Log("-----------------------");
+                
                 await recognizer.StartContinuousRecognitionAsync().ConfigureAwait(true);
-                Log("#######################");
+                Log("Initialize() end-----------------------");
             }
             catch (Exception ex)
             {
@@ -273,25 +290,30 @@ namespace LightControl
 
         #endregion        
 
-        private LightMap ParseJsonLights(dynamic json)
+        private List<LightMap> ParseJsonLights(dynamic json)
         {
             LightMap lightMap;
+            List<LightMap> lightMapList = new List<LightMap>();
+
             Light light = Light.None;
             Place place = Place.None;
             var entities = (JArray)json.entities;
-
+            Log("entities:"+ entities.ToString());
             if(entities != null)
             {
                 entities.ToList().ForEach(ele =>
                 {
+
                     var item = (dynamic)ele;
                     var value = (string)item.entity;
-                    if(!string.IsNullOrEmpty(value) && value != "灯")
-                    {                        
+                    var type = (string)item.type;
+                    if(type == "light")
+                    {
                         var resolvedValues = (JArray)item.resolution.values;
-                        if (resolvedValues != null)
+                        resolvedValues.ToList().ForEach(r =>
                         {
-                            switch (resolvedValues.ToList().First().ToString().ToUpperInvariant())
+                            var v = (dynamic)r;
+                            switch (v.ToString().ToUpperInvariant())
                             {
                                 case "TOPLIGHT":
                                     light = Light.Top;
@@ -305,22 +327,39 @@ namespace LightControl
                                     light = Light.Table;
                                     place = Place.Bedroom;
                                     break;
+                            }
+                            lightMap.light = light;
+                            lightMap.place = place;
+                            lightMapList.Add(lightMap);
+                        });
+
+                    }
+                    if (type == "place")
+                    {
+                        var resolvedValues = (JArray)item.resolution.values;
+                        resolvedValues.ToList().ForEach(r =>
+                        {
+                            var v = (dynamic)r;
+                            switch (v.ToString().ToUpperInvariant())
+                            {
                                 case "BEDROOM":
                                     light = Light.All;
                                     place = Place.Bedroom;
                                     break;
-                                case "ALL":
+                                case "LIVINGROOM":
                                     light = Light.All;
-                                    place = Place.All;
+                                    place = Place.Livingroom;
                                     break;
                             }
-                        }
+                            lightMap.light = light;
+                            lightMap.place = place;
+                            lightMapList.Add(lightMap);
+                        });
                     }
                 });
             }
-            lightMap.light = light;
-            lightMap.place = place;
-            return lightMap;
+            
+            return lightMapList;
         }
 
         private async void testBtn_Click(object sender, EventArgs e)
@@ -331,7 +370,6 @@ namespace LightControl
             if (isRecording)
             {
                 // 启动识别器
-                Log("start----------------");
                 await Initialize();                
                 Switch.Text = "停止";
             }
