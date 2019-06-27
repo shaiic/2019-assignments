@@ -102,7 +102,7 @@ namespace LightControl
         //const string luisEndpoint = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/99ba0b18-fdb9-4773-a908-9c1811037694?verbose=true&timezoneOffset=-360&subscription-key=171ecbac277142d7bd1ba1dc316eb976&q=";
 
         //我的
-        const string speechKey = "5872e34bcb2f4af9ab970f61b5959320";
+        const string speechKey = "3f476ec680884eb5b7a71df28f1fc90e";
         const string speechRegion = "westus";
         const string luisEndpoint = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/6021af12-0bd9-4fba-a088-77730ccf99bf?verbose=true&timezoneOffset=-360&subscription-key=5872e34bcb2f4af9ab970f61b5959320&q=";
 
@@ -131,6 +131,7 @@ namespace LightControl
 
         private async void ProcessSttResult(string text)
         {
+            Log("ProcessSttResult():"+text);
             // 调用语言理解服务取得用户意图
             var json = await GetLuisResult(text);
             if(json == null)
@@ -290,8 +291,9 @@ namespace LightControl
 
         #endregion        
 
-        private List<LightMap> ParseJsonLights(dynamic json)
+        private List<LightMap> ParseJsonLights(dynamic json) 
         {
+            Log("ParseJsonLights():" + json);
             LightMap lightMap;
             List<LightMap> lightMapList = new List<LightMap>();
 
@@ -307,7 +309,7 @@ namespace LightControl
                     var item = (dynamic)ele;
                     var value = (string)item.entity;
                     var type = (string)item.type;
-                    if(type == "light")
+                    if(type == "light" && value.ToString().Length>1)
                     {
                         var resolvedValues = (JArray)item.resolution.values;
                         resolvedValues.ToList().ForEach(r =>
