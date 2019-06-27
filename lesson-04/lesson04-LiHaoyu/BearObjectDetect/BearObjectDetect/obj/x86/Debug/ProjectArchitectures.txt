@@ -1,0 +1,1 @@
+C:\Users\shaiic\source\repos\BearObjectDetect\BearObjectDetect\BearObjectDetect.csproj;x86
