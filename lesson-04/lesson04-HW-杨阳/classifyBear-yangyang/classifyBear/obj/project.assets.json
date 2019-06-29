@@ -8156,11 +8156,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shaiic\\Desktop\\classifyBear-answer\\classifyBear\\classifyBear.csproj",
+      "projectUniqueName": "C:\\Users\\shaiic\\Desktop\\classifyBear-yy\\classifyBear\\classifyBear.csproj",
       "projectName": "classifyBear",
-      "projectPath": "C:\\Users\\shaiic\\Desktop\\classifyBear-answer\\classifyBear\\classifyBear.csproj",
+      "projectPath": "C:\\Users\\shaiic\\Desktop\\classifyBear-yy\\classifyBear\\classifyBear.csproj",
       "packagesPath": "C:\\Users\\shaiic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shaiic\\Desktop\\classifyBear-answer\\classifyBear\\obj\\",
+      "outputPath": "C:\\Users\\shaiic\\Desktop\\classifyBear-yy\\classifyBear\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [

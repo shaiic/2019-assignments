@@ -10,7 +10,7 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>d5d130ac-94c8-4e62-aa20-1c0096423863</PackageIdentityName>
     <PackageIdentityPublisher>CN=shaiic</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\obj\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\obj\x64\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -18,7 +18,7 @@
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\AppX</LayoutDir>
+    <LayoutDir>C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\AppX</LayoutDir>
     <RegisteredManifestChecksum>4A64E2065E42FA050991DEF7FA0341E2A632DC391C0A2E33729F1C1498BFFAE2</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>d5d130ac-94c8-4e62-aa20-1c0096423863_1.0.0.0_x64__97fc1pyj3143g</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>d5d130ac-94c8-4e62-aa20-1c0096423863_97fc1pyj3143g!App</RegisteredUserModeAppID>
@@ -27,16 +27,16 @@
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-06-27T09:33:20.298</Modified>
+      <Modified>2019-06-28T02:48:58.554</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\classifyBear.exe">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\classifyBear.exe">
       <PackagePath>entrypoint\classifyBear.exe</PackagePath>
-      <Modified>2019-06-27T09:33:18.798</Modified>
+      <Modified>2019-06-28T02:48:57.054</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.8\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -46,75 +46,75 @@
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2018-10-23T01:33:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\model.onnx">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\model.onnx">
       <PackagePath>Assets\model.onnx</PackagePath>
       <Modified>2019-06-24T14:20:49.283</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\labels.txt">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\labels.txt">
       <PackagePath>Assets\labels.txt</PackagePath>
       <Modified>2019-06-24T13:52:27.056</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2019-06-21T05:03:13.012</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-06-11T01:54:07.208</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\classifyBear.xr.xml">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\classifyBear.xr.xml">
       <PackagePath>classifyBear.xr.xml</PackagePath>
-      <Modified>2019-06-27T09:33:18.516</Modified>
+      <Modified>2019-06-27T09:09:29.521</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-06-27T09:33:18.548</Modified>
+      <Modified>2019-06-28T02:48:56.788</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2019-06-27T09:33:18.548</Modified>
+      <Modified>2019-06-28T02:48:56.788</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17763.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2018-10-23T00:44:28.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-06-27T09:33:19.563</Modified>
+      <Modified>2019-06-28T02:48:57.742</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-answer\classifyBear\bin\x64\Debug\Core\classifyBear.exe">
+    <AppxPackagedFile Include="C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\bin\x64\Debug\Core\classifyBear.exe">
       <PackagePath>classifyBear.exe</PackagePath>
-      <Modified>2019-06-27T09:33:20.282</Modified>
+      <Modified>2019-06-28T02:48:58.538</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
