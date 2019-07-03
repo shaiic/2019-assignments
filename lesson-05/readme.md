@@ -4,4 +4,4 @@
 
 # 拓展作业
 
-  用代码实现Step2 - LinearRegression 中 04.6-实现逻辑非门
+  根据Step2 - LinearRegression 中 04.6-实现逻辑非门的原理提示，用代码实现逻辑非门
