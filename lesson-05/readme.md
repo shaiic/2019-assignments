@@ -8,4 +8,4 @@
   
 # 命名规范
   
-  文件名请参照lesson01-04作业模板的命名规范
+  文件名请参照 lesson05-HW-{your name}.ipynb 模板的命名规范
