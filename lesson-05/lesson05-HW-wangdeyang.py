@@ -7,7 +7,6 @@ from pathlib import Path
 from matplotlib.colors import LogNorm
 from enum import Enum
 
-
 file_name = "C:/Users/ccc/Documents/ai-edu/B-教学案例与实践/B6-神经网络基本原理简明教程/Data/ch04.npz"
 
 class YNormalizationMethod(Enum):
