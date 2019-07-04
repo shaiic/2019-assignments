@@ -79,7 +79,7 @@ namespace App1
 
                 foreach (var item in output)
                 {
-                    if (item.Probability > 0.5)//可信度
+                    if (item.Probability > 0.1)//可信度
                     {
                         int x = (int)Math.Round(item.BoundingBox.Left * pbWidth);
                         int y = (int)Math.Round(item.BoundingBox.Top * pbHeight);

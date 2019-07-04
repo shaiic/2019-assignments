@@ -71,6 +71,9 @@ namespace LightControl
             // 调用语言理解服务取得用户意图
             string[] intent = await GetLuisResult(text);
 
+            
+            if (intent is null)
+                return;
             // 按照意图控制灯
             if (!string.IsNullOrEmpty(intent[0]))
             {
@@ -78,18 +81,18 @@ namespace LightControl
                 {
                     if (intent[1].Equals("卧室", StringComparison.OrdinalIgnoreCase))
                         OpenLight();
-                    else if (intent[1].Equals("客厅灯", StringComparison.OrdinalIgnoreCase))
+                    else if (intent[1].Equals("客厅", StringComparison.OrdinalIgnoreCase))
                         OpenLight2();
-                    else if (intent[1].Equals("床头", StringComparison.OrdinalIgnoreCase))
+                    else if (intent[1].Equals("台灯", StringComparison.OrdinalIgnoreCase))
                         OpenLight3();
                 }
                 else if (intent[0].Equals("TurnOff", StringComparison.OrdinalIgnoreCase))
                 {
                     if (intent[1].Equals("卧室", StringComparison.OrdinalIgnoreCase))
                         CloseLight();
-                    else if (intent[1].Equals("客厅灯", StringComparison.OrdinalIgnoreCase))
+                    else if (intent[1].Equals("客厅", StringComparison.OrdinalIgnoreCase))
                         CloseLight2();
-                    else if (intent[1].Equals("床头", StringComparison.OrdinalIgnoreCase))
+                    else if (intent[1].Equals("台灯", StringComparison.OrdinalIgnoreCase))
                         CloseLight3();
                 }
             }
@@ -111,9 +114,13 @@ namespace LightControl
                         return null;
                     }
                     string intent = (string)result.topScoringIntent.intent;
-                    string entity = (string)result.entities[0].entity;
+                    string entity ="";
                     double score = (double)result.topScoringIntent.score;
-                    Log("意图: " + intent + "\r\n得分: " + score + "\r\n实体：" + entity + "\r\n");
+                    Log("意图: " + intent + "\r\n得分: " + score + "\r\n" );
+                    if (result.entities == null)
+                        return null; 
+                    entity = (string)result.entities[0].entity;
+                    Log("实体：" + entity + "\r\n");
 
                     
                     return new string[] { intent, entity };
