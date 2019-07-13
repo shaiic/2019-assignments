@@ -10,12 +10,7 @@ cd lesson-07
 
 ### 获取数据
 
-Once you have the starter code (regardless of which method you choose above), you will need to download the CIFAR-10 dataset. Run the following from the `assignment1` directory:
-
-```
-cd assignments1/cs231n/datasets
-./get_datasets.sh
-```
+从连接获取[CIFAR-10数据集](http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz)，并放到目录`assignments1/cs231n/datasets` 下并解压。
 
 ### 安装依赖包
 
