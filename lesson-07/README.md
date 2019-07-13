@@ -10,7 +10,15 @@ cd lesson-07
 
 ### 获取数据
 
-从连接获取[CIFAR-10数据集](http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz)，并放到目录`assignments1/cs231n/datasets` 下并解压。
+从如下百度网盘访问方式获取数据集或者直接通过此链接[CIFAR-10数据集](http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz)。
+```
+链接: https://pan.baidu.com/s/1iXIf-oBZnGlQtmYuLlOW7A 提取码: jeg9 
+```
+下载完成放到目录`assignments1/cs231n/datasets` 下并解压。
+```bash
+tar -xzvf cifar-10-python.tar.gz
+rm cifar-10-python.tar.gz
+```
 
 ### 安装依赖包
 
