@@ -1,3 +1,16 @@
 */.ipynb_checkpoints/
 .ipynb_checkpoints/
 .DS_Store
+
+/lesson-07/assignment1/cs231n/datasets/
+/lesson-07/*/cs231n/datasets/
+
+/lesson-04/lesson04-HW-yangjianmin/LightControl/.vs/
+/lesson-04/lesson04-HW-yangjianmin/LightControl/LightControl/bin/
+/lesson-04/lesson04-HW-yangjianmin/LightControl/LightControl/obj/
+/lesson-04/lesson04-HW-yangjianmin/LightControl/packages/
+
+/lesson-04/lesson04-HW-yangjianmin/classifyBear/.vs/
+/lesson-04/lesson04-HW-yangjianmin/classifyBear/classifyBear/bin/
+/lesson-04/lesson04-HW-yangjianmin/classifyBear/classifyBear/obj/
+/lesson-04/lesson04-HW-yangjianmin/classifyBear/packages/
