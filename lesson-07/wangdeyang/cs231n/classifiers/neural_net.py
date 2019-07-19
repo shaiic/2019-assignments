@@ -4,7 +4,7 @@ from builtins import range
 from builtins import object
 import numpy as np
 import matplotlib.pyplot as plt
-from past.builtins import xrange
+#from past.builtins import xrange
 
 class TwoLayerNet(object):
     """
@@ -80,7 +80,14 @@ class TwoLayerNet(object):
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+        first_step = np.dot(X,W1) + b1
+        first_step[first_step < 0] = 0
+
+        second_step = np.dot(first_step,W2) + b2
+        second_step = np.exp(second_step)
+        second_step = second_step / np.mean(second_step,keepdims=True)
+
+        scores = second_step
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -98,7 +105,9 @@ class TwoLayerNet(object):
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+
+        loss = scores - y
+        loss = loss.sum(axis=0, keepdims=True)/N
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -112,6 +121,10 @@ class TwoLayerNet(object):
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
         pass
+        grads['B2'] = loss
+        #grads['W2'] = np.dot(second_step,loss)
+        grads['B1'] = loss
+        grads['W1'] = np.dot(second_step,loss)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
