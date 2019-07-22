@@ -85,7 +85,7 @@ class TwoLayerNet(object):
 
         second_step = np.dot(first_step,W2) + b2
         second_step = np.exp(second_step)
-        second_step = second_step / np.mean(second_step,keepdims=True)
+        second_step = second_step / np.mean(second_step,axis=0,keepdims=True)
 
         scores = second_step
 
@@ -105,9 +105,12 @@ class TwoLayerNet(object):
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-
+        print(scores.shape)
+        scores = scores.sum(axis=0, keepdims=True)/N
+        print(scores.shape)
+        print(scores,y)
         loss = scores - y
-        loss = loss.sum(axis=0, keepdims=True)/N
+        #loss = loss.sum(axis=0, keepdims=True)/N
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -120,11 +123,12 @@ class TwoLayerNet(object):
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
-        grads['B2'] = loss
-        #grads['W2'] = np.dot(second_step,loss)
-        grads['B1'] = loss
-        grads['W1'] = np.dot(second_step,loss)
+        first_step_re = first_step.sum(axis=0, keepdims=True)/N
+        x_re = X.sum(axis=0, keepdims=True)/N
+        grads['b2'] = loss
+        grads['W2'] = np.dot(first_step_re.T,loss)
+        grads['b1'] = np.dot(loss,W2.T)
+        grads['W1'] = np.dot(x_re.T,grads['b1'])
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -163,13 +167,19 @@ class TwoLayerNet(object):
             X_batch = None
             y_batch = None
 
+
+
             #########################################################################
             # TODO: Create a random minibatch of training data and labels, storing  #
             # them in X_batch and y_batch respectively.                             #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            seed = np.random.randint(0,1000)
+            np.random.seed(seed)
+            X_batch = np.random.permutation(X)
+            np.random.seed(seed)
+            y_batch = np.random.permutation(y)
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -185,7 +195,12 @@ class TwoLayerNet(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+
+            self.params['W1'] = self.params['W1'] - learning_rate * grads['W1']
+            self.params['W2'] = self.params['W2'] - learning_rate * grads['W2']
+            self.params['b1'] = self.params['b1'] - learning_rate * grads['b1']
+            self.params['b2'] = self.params['b2'] - learning_rate * grads['b2']
+            learning_rate = learning_rate * learning_rate_decay
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -231,8 +246,13 @@ class TwoLayerNet(object):
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+        first_step = np.dot(X,self.params['W1']) + self.params['b1']
+        first_step[first_step < 0] = 0
 
+        second_step = np.dot(first_step,self.params['W2']) + self.params['b2']
+        second_step = np.exp(second_step)
+        second_step = second_step / np.mean(second_step,keepdims=True)
+        y_pred = second_step
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
         return y_pred
