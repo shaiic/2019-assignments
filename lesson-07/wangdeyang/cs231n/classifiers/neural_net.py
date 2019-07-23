@@ -70,6 +70,7 @@ class TwoLayerNet(object):
         W1, b1 = self.params['W1'], self.params['b1']
         W2, b2 = self.params['W2'], self.params['b2']
         N, D = X.shape
+        print(N,D)
 
         # Compute the forward pass
         scores = None
@@ -82,13 +83,10 @@ class TwoLayerNet(object):
 
         first_step = np.dot(X,W1) + b1
         first_step[first_step < 0] = 0
+        print('first_step',first_step.shape,first_step)
 
         second_step = np.dot(first_step,W2) + b2
-        second_step = np.exp(second_step)
-        second_step = second_step / np.mean(second_step,axis=0,keepdims=True)
-
         scores = second_step
-
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
         # If the targets are not given then jump out, we're done
@@ -105,11 +103,24 @@ class TwoLayerNet(object):
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
+
+        '''
         print(scores.shape)
         scores = scores.sum(axis=0, keepdims=True)/N
+        '''
+        scores = scores - np.max(scores, axis = 1, keepdims = True)
+        scores = np.exp(scores)
+        scores = scores / np.sum(scores,axis=1,keepdims=True)
+
+        print('scores',scores.shape,scores)
         print(scores.shape)
         print(scores,y)
-        loss = scores - y
+
+        #loss = scores - y
+        corect_logprobs = -np.log(scores[range(N), y])
+        data_loss = np.sum(corect_logprobs) / N
+        reg_loss = 0.5 * reg * np.sum(W1 * W1) + 0.5 * reg * np.sum(W2 * W2)
+        loss = data_loss + reg_loss
         #loss = loss.sum(axis=0, keepdims=True)/N
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
@@ -123,12 +134,40 @@ class TwoLayerNet(object):
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
+        '''
         first_step_re = first_step.sum(axis=0, keepdims=True)/N
         x_re = X.sum(axis=0, keepdims=True)/N
         grads['b2'] = loss
         grads['W2'] = np.dot(first_step_re.T,loss)
         grads['b1'] = np.dot(loss,W2.T)
         grads['W1'] = np.dot(x_re.T,grads['b1'])
+        '''
+
+        dscores = scores
+        print('dscores',dscores)
+        dscores[range(N),y] -= 1
+        dscores /= N
+
+        # W2 and b2
+        grads['W2'] = np.dot(first_step.T, dscores) #这步没明白 dscores与first_step不用降维？
+        '''
+        print('first_step',first_step)
+        print('dscores',dscores)
+        print("grads['W2']",grads['W2'])
+        '''
+        grads['b2'] = np.sum(dscores, axis=0)
+        # next backprop into hidden layer
+        dhidden = np.dot(dscores, W2.T)
+        # backprop the ReLU non-linearity
+        dhidden[first_step <= 0] = 0
+        # finally into W,b
+        grads['W1'] = np.dot(X.T, dhidden)
+        grads['b1'] = np.sum(dhidden, axis=0)
+
+        # add regularization gradient contribution
+        grads['W2'] += reg * W2
+        grads['W1'] += reg * W1
+    #########################################
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -174,13 +213,16 @@ class TwoLayerNet(object):
             # them in X_batch and y_batch respectively.                             #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
+            '''
             seed = np.random.randint(0,1000)
             np.random.seed(seed)
             X_batch = np.random.permutation(X)
             np.random.seed(seed)
             y_batch = np.random.permutation(y)
-
+            '''
+            sample_indices = np.random.choice(np.arange(num_train), batch_size)
+            X_batch = X[sample_indices]
+            y_batch = y[sample_indices]
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
             # Compute loss and gradients using the current minibatch
@@ -196,11 +238,10 @@ class TwoLayerNet(object):
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
 
-            self.params['W1'] = self.params['W1'] - learning_rate * grads['W1']
-            self.params['W2'] = self.params['W2'] - learning_rate * grads['W2']
-            self.params['b1'] = self.params['b1'] - learning_rate * grads['b1']
-            self.params['b2'] = self.params['b2'] - learning_rate * grads['b2']
-            learning_rate = learning_rate * learning_rate_decay
+            self.params['W1'] += -learning_rate * grads['W1']
+            self.params['b1'] += -learning_rate * grads['b1']
+            self.params['W2'] += -learning_rate * grads['W2']
+            self.params['b2'] += -learning_rate * grads['b2']
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -245,7 +286,7 @@ class TwoLayerNet(object):
         # TODO: Implement this function; it should be VERY simple!                #
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
+        '''
         first_step = np.dot(X,self.params['W1']) + self.params['b1']
         first_step[first_step < 0] = 0
 
@@ -253,6 +294,12 @@ class TwoLayerNet(object):
         second_step = np.exp(second_step)
         second_step = second_step / np.mean(second_step,keepdims=True)
         y_pred = second_step
+
+        '''
+        z1 = X.dot(self.params['W1']) + self.params['b1']
+        a1 = np.maximum(0, z1) # pass through ReLU activation function
+        scores = a1.dot(self.params['W2']) + self.params['b2']
+        y_pred = np.argmax(scores, axis=1)
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
         return y_pred
