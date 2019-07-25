@@ -2,6 +2,9 @@
 .ipynb_checkpoints/
 .DS_Store
 
+/lesson-07/assignment1/cs231n/datasets/
+/lesson-07/*/cs231n/datasets/
+
 /lesson-04/lesson04-HW-yangjianmin/LightControl/.vs/
 /lesson-04/lesson04-HW-yangjianmin/LightControl/LightControl/bin/
 /lesson-04/lesson04-HW-yangjianmin/LightControl/LightControl/obj/
