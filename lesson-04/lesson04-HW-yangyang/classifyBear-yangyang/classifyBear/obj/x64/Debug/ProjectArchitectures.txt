@@ -1,1 +1,0 @@
-C:\Users\shaiic\Desktop\classifyBear-yy\classifyBear\classifyBear.csproj;x64
