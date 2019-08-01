@@ -13,7 +13,6 @@ def readNum(pred):
       index += 1
   return -1
 
-
 def predicateImage(img):
   img = img.resize((28, 28), Image.ANTIALIAS)
   im2arr = np.array(img)
@@ -25,11 +24,4 @@ def predicateImage(img):
 def predicateFile(imgFile):  
   img = Image.open(imgFile).convert("L")
   return predicateImage(img)
-  
-def predicate():
-  for index in range(10):
-    result = predicateFile('test/' + str(index) + '.png')
-    print('---------------------- begin to predicate ' + str(index) + ':---------------------')  
-    print(result)
 
-# predicate()
