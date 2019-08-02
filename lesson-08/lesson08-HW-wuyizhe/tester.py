@@ -7,4 +7,8 @@ def predicate():
           str(index) + ':---------------------')
     print(result)
 
-predicate()
+
+# predicate()
+
+result = predicateFile('./3_1.jpg')
+print(result)

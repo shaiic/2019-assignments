@@ -12,7 +12,9 @@ class Drawing(QWidget):
  
   self.resize(284, 330)  # resize设置宽高
   self.move(100, 100)    # move设置位置
+  self.setFixedSize(284, 330)
   self.setWindowTitle("nmist模型验证")
+  # self.setWindowFlags(Qt.WindowMinMaxButtonsHint|QT.cl) 
 
   self.setMouseTracking(False)
   self.pos_xy = []
@@ -43,10 +45,21 @@ class Drawing(QWidget):
   self.btn_close.clicked.connect(self.btn_recognize_on_clicked)
 
  def btn_recognize_on_clicked(self):
-   bbox = (104, 104, 380, 380)
-   im = ImageGrab.grab(bbox)
-   result = predicateImage(im)
-   self.label_result.setText(str(result))
+  x = 104
+  y = 134
+  lengh = 278
+  x1 = x + lengh
+  y1 = y + lengh
+  im = ImageGrab.grab((x, y, x1, y1)).convert('L')
+  px = im.load()
+  print(px)
+  for i in range(im.width):
+    for j in range(im.height):
+      if px[j, i] <= 250:
+        im.putpixel((j, i), 0)
+  im.save('./temp.jpg')
+  result = predicateFile('./temp.jpg')
+  self.label_result.setText(str(result))
 
  def btn_clear_on_clicked(self):
    self.pos_xy = []
