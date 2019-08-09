@@ -11,12 +11,13 @@ import csv
 train_file = "./data/ch14.house.train.npz"
 test_file = "./data/ch14.house.test.npz"
 
+
 class HouseDataReader(DataReader_2_0):
     def Drop(self):
-        self.XTrain = np.delete(self.XTrain, [0,1,8,9], axis=1)
-        self.XTrainRaw = np.delete(self.XTrainRaw, [0,1,8,9], axis=1)
-        self.XTest = np.delete(self.XTest, [0,1,8,9], axis=1)
-        self.XTestRaw = np.delete(self.XTestRaw, [0,1,8,9], axis=1)
+        self.XTrain = np.delete(self.XTrain, [0, 1, 8, 9], axis=1)
+        self.XTrainRaw = np.delete(self.XTrainRaw, [0, 1, 8, 9], axis=1)
+        self.XTest = np.delete(self.XTest, [0, 1, 8, 9], axis=1)
+        self.XTestRaw = np.delete(self.XTestRaw, [0, 1, 8, 9], axis=1)
         self.num_feature = self.XTrainRaw.shape[1]
 
 
@@ -30,19 +31,22 @@ def LoadData():
     dr.GenerateValidationSet(k=10)
     return dr
 
+
 def ShowResult(net, dr):
-    y_test_result = net.inference(dr.XTest[0:1000,:])
+    y_test_result = net.inference(dr.XTest[0:1000, :])
     y_test_real = dr.DeNormalizeY(y_test_result)
-    plt.scatter(y_test_real, y_test_real-dr.YTestRaw[0:1000,:], marker='o', label='test data')
+    plt.scatter(y_test_real, y_test_real -
+                dr.YTestRaw[0:1000, :], marker='o', label='test data')
 #    y_train_result = dr.DeNormalizeY(net.inference(dr.XTrain[0:100,:]))
 #    plt.scatter(y_train_result, y_train_result-dr.YTestRaw[0:100,:], marker='s', label='train data')
 
     plt.show()
 
+
 def Inference(net, dr):
     output = net.inference(dr.XTest)
     real_output = dr.DeNormalizeY(output)
-    with open('house_predict.csv','w', newline='') as csvfile:
+    with open('house_predict.csv', 'w', newline='') as csvfile:
         f = csv.writer(csvfile, delimiter=' ')
         f.writerow('price')
         for i in range(real_output.shape[0]):
@@ -55,16 +59,10 @@ def model(dr):
     # num_hidden2 = 16
     # num_hidden3 = 8
     # num_hidden4 = 4
-
-    num_hidden1 = 32
-    num_hidden2 = 16
-    num_hidden3 = 8
-    num_hidden4 = 4
-    num_hidden5 = 2
-
+    nums_hidden = [64, 32, 16, 8, 4]
     num_output = 1
 
-    max_epoch = 10
+    max_epoch = 2000
     batch_size = 16
     learning_rate = 0.1
 
@@ -76,41 +74,41 @@ def model(dr):
 
     net = NeuralNet_4_0(params, "HouseSingle")
 
-    fc1 = FcLayer_1_0(num_input, num_hidden1, params)
+    fc1 = FcLayer_1_0(num_input, nums_hidden[0], params)
     net.add_layer(fc1, "fc1")
     r1 = ActivationLayer(Relu())
     net.add_layer(r1, "r1")
 
-    fc2 = FcLayer_1_0(num_hidden1, num_hidden2, params)
+    fc2 = FcLayer_1_0(nums_hidden[0], nums_hidden[1], params)
     net.add_layer(fc2, "fc2")
     r2 = ActivationLayer(Relu())
     net.add_layer(r2, "r2")
 
-    fc3 = FcLayer_1_0(num_hidden2, num_hidden3, params)
+    fc3 = FcLayer_1_0(nums_hidden[1], nums_hidden[2], params)
     net.add_layer(fc3, "fc3")
     r3 = ActivationLayer(Relu())
     net.add_layer(r3, "r3")
 
-    fc4 = FcLayer_1_0(num_hidden3, num_hidden4, params)
+    fc4 = FcLayer_1_0(nums_hidden[2], nums_hidden[3], params)
     net.add_layer(fc4, "fc4")
     r4 = ActivationLayer(Relu())
     net.add_layer(r4, "r4")
 
+    if len(nums_hidden) == 4:
+        fc5 = FcLayer_1_0(nums_hidden[3], num_output, params)
+        net.add_layer(fc5, "fc5")
 
-    fc5 = FcLayer_1_0(num_hidden4, num_hidden5, params)
-    net.add_layer(fc5, "fc5")
-    r5 = ActivationLayer(Relu())
-    net.add_layer(r5, "r5")
+    if len(nums_hidden) == 5:
+        fc5 = FcLayer_1_0(nums_hidden[3], nums_hidden[4], params)
+        net.add_layer(fc5, "fc5")
+        r5 = ActivationLayer(Relu())
+        net.add_layer(r5, "r5")
 
-    fc6 = FcLayer_1_0(num_hidden5, num_output, params)
-    net.add_layer(fc6, "fc6")
-
-    # fc5 = FcLayer_1_0(num_hidden4, num_output, params)
-    # net.add_layer(fc5, "fc5")
+        fc6 = FcLayer_1_0(nums_hidden[4], num_output, params)
+        net.add_layer(fc6, "fc6")
 
     net.train(dr, checkpoint=10, need_test=True)
     return net
-
 
 
 if __name__ == '__main__':
@@ -120,6 +118,6 @@ if __name__ == '__main__':
     real_output = dr.DeNormalizeY(output)
     mse = np.sum((dr.YTestRaw - real_output)**2)/dr.YTest.shape[0]/10000
     print("mse=", mse)
-    
+
     net.ShowLossHistory()
     ShowResult(net, dr)
